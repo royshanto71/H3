@@ -5,12 +5,13 @@ Question No. 01
 
 integer n,i,j,B(100)
 
+print*,'Enter a positive decimal integer:'
 read*,n
 i=1
 do while(n/2 .gt. 0)
-   B(i)=mod(n,2)
-   n=n/2
-   i=i+1
+B(i)=mod(n,2)
+n=n/2
+i=i+1
 enddo
 B(i)=n
 print*,'binary representation:'
@@ -18,8 +19,6 @@ print 10,(B(j),j=i,1,-1)
 10 format (20 i1)
 stop
 end
-
-
 
 Question No. 02
 প্রশ্ন: ২। x^2 + y^2 = r^2 বৃত্তের ভিতরে অবস্থিত পূর্ণসংখ্যা স্থানাঙ্কবিশিষ্ট বিন্দুর সংখ্যা নির্ণয়ের জন্য একটি Fortran Program লেখ যা ব্যবহারকারীর কাছ থেকে r এর মান গ্রহণ করবে।
@@ -29,19 +28,18 @@ Question No. 02
 integer x,y,ir,k
 real r
 
+print*,'Enter the value of radius r:'
 read*,r
 ir=int(r)
 k=0
 do x=-ir,ir
-   do y=-ir,ir
-      if (float(x**2+y**2) .lt. r**2) k=k+1
-   enddo
+do y=-ir,ir
+if (float(x2+y2) .lt. r**2) k=k+1
+enddo
 enddo
 print*,'number of points=',k
 stop
 end
-
-
 
 Question No. 03
 প্রশ্ন: ৩। একটি Fortran Program লেখ যা একটি ধনাত্মক পূর্ণসংখ্যা পড়বে এবং সংখ্যাটি মৌলিক কিনা তা নির্ণয় করবে। যদি সংখ্যাটি মৌলিক না হয়, তবে তার উৎপাদকসমূহ নির্ণয় করবে।
@@ -50,11 +48,12 @@ Question No. 03
 
 integer m(10),n,i,k
 
+print*,'Enter a positive integer:'
 read*,n
 if(n .lt. 0) stop
 
 do i=2,n/2
-   if(mod(n,i) .eq. 0) go to 7
+if(mod(n,i) .eq. 0) go to 7
 enddo
 
 print*,n,'is a prime'
@@ -65,21 +64,19 @@ print*,'the factors are'
 k=0
 i=2
 do while(i .le. n)
-   if(mod(n,i) .eq. 0) then
-      k=k+1
-      m(k)=i
-      n=n/i
-   else
-      i=i+1
-   endif
+if(mod(n,i) .eq. 0) then
+k=k+1
+m(k)=i
+n=n/i
+else
+i=i+1
+endif
 enddo
 
 print 10,(m(i),i=1,k)
 10 format(10(i2,'x'))
 stop
 end
-
-
 
 Question No. 04
 প্রশ্ন: ৪। একটি সংখ্যার Factorial হিসাবের জন্য ফাংশন সাবপ্রোগ্রাম ব্যবহার করে ^nC_r এর মান নির্ণয়ের জন্য একটি Fortran Program লেখ।
@@ -99,12 +96,10 @@ function fact(n)
 integer fact,n,i
 fact=1
 do i=2,n
-   fact=fact*i
+fact=fact*i
 enddo
 return
 end
-
-
 
 Question No. 05
 প্রশ্ন: ৫। একটি n \times n ক্রমের ম্যাট্রিক্সের (ক) প্রধান কর্ণের উপরের ভুক্তি এবং (খ) প্রধান কর্ণের নিচের ভুক্তিসমূহের যোগ করার জন্য একটি Fortran Program লেখ।
@@ -115,15 +110,16 @@ parameter(n=3)
 real a(n,n),suml,sumu
 integer i,j
 
+print*,'Enter the elements of the 3x3 matrix row by row:'
 read*,((a(i,j),j=1,n),i=1,n)
 suml=0.0
 sumu=0.0
 
 do i=1,n
-   do j=1,n
-      if(i .gt. j) suml=suml+a(i,j)
-      if(i .lt. j) sumu=sumu+a(i,j)
-   enddo
+do j=1,n
+if(i .gt. j) suml=suml+a(i,j)
+if(i .lt. j) sumu=sumu+a(i,j)
+enddo
 enddo
 
 print*,'sum of elements lower main diagonal=',suml
@@ -131,13 +127,10 @@ print*,'sum of elements upper main diagonal=',sumu
 stop
 end
 
-
-
 Question No. 07
 প্রশ্ন: ৭। 2-বিন্দু, 3-বিন্দু এবং 4-বিন্দু ল্যাগরেঞ্জ এর ইন্টারপোলেশন সূত্র ব্যবহার করে নিম্নলিখিত ডাটা হতে f(6.0) নির্ণয় করার জন্য একটি Fortran Program লেখ:
 
 উত্তর:
-
 
 real x(0:3),f(0:3)
 real y,sum,p
@@ -149,21 +142,20 @@ data f/101.0,102.0,103.0,104.0/
 y=6.0
 
 do 18 k=2,4
-   sum=0.0
-   do i=0,k-1
-      p=1.0
-      do 10 j=0,k-1
-         if(i .eq. j) go to 10
-         p=p*(y-x(j))/(x(i)-x(j))
-10    continue
-      sum=sum+p*f(i)
-   enddo
-   print*,k,'-point interpolation =',sum
+sum=0.0
+do i=0,k-1
+p=1.0
+do 10 j=0,k-1
+if(i .eq. j) go to 10
+p=p*(y-x(j))/(x(i)-x(j))
+10 continue
+sum=sum+pf(i)
+enddo
+print,k,'-point interpolation =',sum
 18 continue
 
 stop
 end
-
 
 Question No. 08
 প্রশ্ন: ৮। Simpson's 1/3 rule ব্যবহার করে \int_0^1 \sqrt{1-x^2} dx এর মান বের করার জন্য একটি Fortran Program লেখ।
@@ -184,14 +176,13 @@ h=(b-a)/real(n)
 sum=h*(f(a)+f(b))/3.0
 
 do 15 i=1,n-1,2
-   sum=sum+4.0*h*f(a+real(i)*h)/3.0
+sum=sum+4.0hf(a+real(i)*h)/3.0
 15 continue
 
 do 25 j=2,n-2,2
-   sum=sum+2.0*h*f(a+real(j)*h)/3.0
+sum=sum+2.0hf(a+real(j)*h)/3.0
 25 continue
 
 print*,' the value of integration=',sum
 stop
 end
-
